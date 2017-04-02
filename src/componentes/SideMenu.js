@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Li from "./Li";
+import Li from "./Commons/Li";
 
 export default class SideMenu extends Component {
 
