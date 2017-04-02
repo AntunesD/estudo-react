@@ -28,7 +28,7 @@ export default class AutorBox extends Component {
                     <h1>Cadastro de Autores</h1>
                 </div>            
                 <div className="content" id="content">
-                    <FormularioCadastroAutor atualizaListagem={this.atualizaListagem.bind(this)}/>
+                    <FormularioCadastroAutor callbackAtualizaListagem={this.atualizaListagem.bind(this)}/>
                     <ListagemAutores lista={this.state.lista}/>          
                 </div>
             </div>    

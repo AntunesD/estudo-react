@@ -33,7 +33,7 @@ export default class FormularioCadastroAutor extends Component {
             type:'post',
             data: JSON.stringify({nome:this.state.nome,email:this.state.email,senha:this.state.senha}),
             success: function(response){
-                this.props.atualizaListagem(response);
+                this.props.callbackAtualizaListagem(response);
             }.bind(this),
             error: function(response){
                 console.log(response);
