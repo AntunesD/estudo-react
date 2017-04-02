@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import PubSub from 'pubsub-js';
 import $ from 'jquery';
 
 import FormularioCadastroAutor from './FormularioCadastroAutor'; 
-import ListagemAutores from './ListagemAutores'; 
+import ListagemAutores from './ListagemAutores';
 
 export default class AutorBox extends Component {
 
     constructor() {
         super();    
         this.state = {lista : []};
+        this.setSubscriber();
     }
 
     componentDidMount(){
@@ -28,11 +30,17 @@ export default class AutorBox extends Component {
                     <h1>Cadastro de Autores</h1>
                 </div>            
                 <div className="content" id="content">
-                    <FormularioCadastroAutor callbackAtualizaListagem={this.atualizaListagem.bind(this)}/>
+                    <FormularioCadastroAutor />
                     <ListagemAutores lista={this.state.lista}/>          
                 </div>
             </div>    
         );
+    }
+
+    setSubscriber() {
+        PubSub.subscribe('atualizar-autores', function(topic, response){
+            this.atualizaListagem(response);
+        }.bind(this));
     }
 
     atualizaListagem(lista) {

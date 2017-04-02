@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PubSub from 'pubsub-js';
 import $ from 'jquery';
 
 import InputCustomizado from '../Commons/InputCustomizado';
@@ -33,8 +34,8 @@ export default class FormularioCadastroAutor extends Component {
             type:'post',
             data: JSON.stringify({nome:this.state.nome,email:this.state.email,senha:this.state.senha}),
             success: function(response){
-                this.props.callbackAtualizaListagem(response);
-            }.bind(this),
+                PubSub.publish('atualizar-autores', response)
+            },
             error: function(response){
                 console.log(response);
             }
