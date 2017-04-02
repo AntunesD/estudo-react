@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 
 export default class ListagemAutores extends Component {
     
-    constructor() {
-        super();    
-        this.state = {lista : []};
-    }
-
     render() {
         return(
             <div>            
@@ -20,7 +14,7 @@ export default class ListagemAutores extends Component {
                     </thead>
                     <tbody>
                     {
-                        this.state.lista.map(function(autor){
+                        this.props.lista.map(function(autor){
                             return (
                                 <tr key={autor.id}>
                                     <td>{autor.nome}</td>
@@ -33,15 +27,5 @@ export default class ListagemAutores extends Component {
                 </table> 
             </div>   
         );
-    }
-
-    componentDidMount(){
-        $.ajax({
-            url:"http://localhost:8080/api/autores",
-            dataType: 'json',
-            success:function(resposta){    
-                this.setState({lista:resposta});
-            }.bind(this)
-        });          
     }
 }
