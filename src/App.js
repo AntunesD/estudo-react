@@ -2,14 +2,20 @@ import './css/pure-min.css';
 import './css/side-menu.css';
 
 import React, { Component } from 'react';
-
-import Home from './componentes/Home/Home';
+import SideMenu from './componentes/SideMenu';
 
 class App extends Component {
 
     render() {    
         return (
-            <Home />  
+            <div id="layout">
+                <SideMenu />
+                <div id="main">
+                    <div>
+                        {this.props.children}
+                    </div>
+                </div>            
+            </div>   
         );
     }
 }

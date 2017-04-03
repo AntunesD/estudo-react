@@ -4,7 +4,6 @@ import $ from 'jquery';
 
 import FormularioCadastroAutor from './FormularioCadastroAutor'; 
 import ListagemAutores from './ListagemAutores';
-import SideMenu from '../SideMenu';
 
 export default class AutorBox extends Component {
 
@@ -12,6 +11,20 @@ export default class AutorBox extends Component {
         super();    
         this.state = {lista : []};
         this.setSubscriber();
+    }
+
+    render() {
+        return(
+            <div>
+                <div className="header">
+                    <h1>Cadastro de Autores</h1>
+                </div>            
+                <div className="content" id="content">
+                    <FormularioCadastroAutor />
+                    <ListagemAutores lista={this.state.lista}/>          
+                </div>
+            </div>
+        );
     }
 
     componentDidMount(){
@@ -23,25 +36,6 @@ export default class AutorBox extends Component {
             }.bind(this)
         });
     }    
-
-    render() {
-        return(
-            <div id="layout">
-                <SideMenu />
-                <div id="main">
-                    <div>
-                        <div className="header">
-                            <h1>Cadastro de Autores</h1>
-                        </div>            
-                        <div className="content" id="content">
-                            <FormularioCadastroAutor />
-                            <ListagemAutores lista={this.state.lista}/>          
-                        </div>
-                    </div>
-                </div>            
-            </div>   
-        );
-    }
 
     setSubscriber() {
         PubSub.subscribe('atualizar-autores', function(topic, response){
