@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PubSub from 'pubsub-js';
 import $ from 'jquery';
 
+import AutorFormErrors from './AutorFormErrors';
 import InputCustomizado from '../Commons/InputCustomizado';
 import Button from '../Commons/Button';
 
@@ -12,6 +13,10 @@ export default class FormularioCadastroAutor extends Component {
         this.state = {nome:'',email:'',senha:''};
     }
     
+    componentWillUpdate() {
+        PubSub.publish('clear-errors', {});
+    }
+
     render() {
         return (
             <div className="pure-form pure-form-aligned">
@@ -34,10 +39,13 @@ export default class FormularioCadastroAutor extends Component {
             type:'post',
             data: JSON.stringify({nome:this.state.nome,email:this.state.email,senha:this.state.senha}),
             success: function(response){
-                PubSub.publish('atualizar-autores', response)
-            },
+                PubSub.publish('atualizar-autores', response);
+                this.setState({nome:'',email:'',senha:''});
+            }.bind(this),
             error: function(response){
-                console.log(response);
+                if(response.status === 400) {
+                    new AutorFormErrors().publishErrors(response.responseJSON);
+                }
             }
         });
     }
