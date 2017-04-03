@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 
 export default class SideMenu extends Component {
     render() {
@@ -8,13 +9,13 @@ export default class SideMenu extends Component {
                     <a className="pure-menu-heading" href="#">Company</a>
                     <ul className="pure-menu-list">
                         <li className="pure-menu-item">
-                            <a href="#" className="pure-menu-link">Home</a>
+                            <Link to="/" className="pure-menu-link">Home</Link>
                         </li>
                         <li className="pure-menu-item">
-                            <a href="#" className="pure-menu-link">Autor</a>
+                            <Link to="autor" className="pure-menu-link">Autor</Link>
                         </li>
                         <li className="pure-menu-item">
-                            <a href="#" className="pure-menu-link">Livro</a>
+                            <Link to="/" className="pure-menu-link">Livro</Link>
                         </li>
                     </ul>
                 </div>

@@ -12,7 +12,7 @@ export default class FormularioCadastroAutor extends Component {
         super();    
         this.state = {nome:'',email:'',senha:''};
     }
-    
+
     componentWillUpdate() {
         PubSub.publish('clear-errors', {});
     }
