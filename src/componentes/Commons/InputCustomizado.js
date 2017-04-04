@@ -20,7 +20,7 @@ export default class InputCustomizado extends Component{
 	}
 
     setSubscriber() {
-        PubSub.subscribe('autor-form-error', function(topic, response){
+        PubSub.subscribe('form-error', function(topic, response){
             if (response.field === this.props.name) {
                 this.setState({msgErro:response.defaultMessage});
             }

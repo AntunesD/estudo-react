@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PubSub from 'pubsub-js';
 import $ from 'jquery';
 
-import AutorFormErrors from './AutorFormErrors';
+import FormErrors from '../Commons/FormErrors';
 import InputCustomizado from '../Commons/InputCustomizado';
 import Button from '../Commons/Button';
 
@@ -43,9 +43,7 @@ export default class FormularioCadastroAutor extends Component {
                 this.setState({nome:'',email:'',senha:''});
             }.bind(this),
             error: function(response){
-                if(response.status === 400) {
-                    new AutorFormErrors().publishErrors(response.responseJSON);
-                }
+                new FormErrors().publishErrors(response.responseJSON);
             }
         });
     }

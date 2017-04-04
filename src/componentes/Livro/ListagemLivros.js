@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PubSub from 'pubsub-js';
-import LoadAutores from './LoadAutores';
+import $ from 'jquery';
 
-export default class ListagemAutores extends Component {
+export default class ListagemLivros extends Component {
 
     constructor() {
         super();    
@@ -11,9 +11,13 @@ export default class ListagemAutores extends Component {
     }
 
     componentDidMount(){
-        this.atualizaListagem(
-            new LoadAutores().load()
-        );
+        $.ajax({
+            url:"http://localhost:8080/api/livros",
+            dataType: 'json',
+            success:function(response){
+                this.atualizaListagem(response);
+            }.bind(this)
+        });
     }    
 
     render() {
@@ -22,17 +26,19 @@ export default class ListagemAutores extends Component {
                 <table className="pure-table">
                     <thead>
                         <tr>
-                            <th>Nome</th>
-                            <th>email</th>
+                            <th>Id</th>
+                            <th>Titulo</th>
+                            <th>Preço</th>
                         </tr>
                     </thead>
                     <tbody>
                     {
-                        this.state.lista.map(function(autor){
+                        this.state.lista.map(function(livro){
                             return (
-                                <tr key={autor.id}>
-                                    <td>{autor.nome}</td>
-                                    <td>{autor.email}</td>
+                                <tr key={livro.id}>
+                                    <td>{livro.id}</td>
+                                    <td>{livro.titulo}</td>
+                                    <td>{livro.preco}</td>
                                 </tr>
                             );
                         })
@@ -44,7 +50,7 @@ export default class ListagemAutores extends Component {
     }
 
     setSubscriber() {
-        PubSub.subscribe('atualizar-autores', function(topic, response){
+        PubSub.subscribe('atualizar-livros', function(topic, response){
             this.atualizaListagem(response);
         }.bind(this));
     }
