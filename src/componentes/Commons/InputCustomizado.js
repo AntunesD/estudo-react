@@ -6,9 +6,10 @@ export default class InputCustomizado extends Component{
     constructor(props) {
         super(props);
         this.state = {msgErro:""};
-        this.setSubscriber();
-    }
+        this.setSubscriber(); 
 
+    }
+    
 	render() {
 		return (
             <div className="pure-control-group">

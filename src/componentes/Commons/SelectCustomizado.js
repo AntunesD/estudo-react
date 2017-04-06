@@ -10,7 +10,7 @@ export default class SelectCustomizado extends Component{
                     {
                         this.props.list.map(function(row){
                             return (
-                                <option value={row.id}>{row.nome}</option>
+                                <option key={row.id} value={row.id}>{row.nome}</option>
                             );
                         })
                     }

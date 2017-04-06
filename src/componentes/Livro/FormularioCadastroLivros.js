@@ -21,10 +21,6 @@ export default class FormularioCadastroLivros extends Component {
         );
     }
 
-    componentWillUpdate() {
-        PubSub.publish('clear-errors', {});
-    }
-
     render() {
         return(
             <div className="pure-form pure-form-aligned">
@@ -35,7 +31,7 @@ export default class FormularioCadastroLivros extends Component {
                     <InputCustomizado id="preco" type="number" name="preco" value={this.state.preco} 
                         onChange={this.setPreco.bind(this)} label="Preço"/>                                              
  
-                    <SelectCustomizado list={this.state.autorList} label="AutorId" onChange={this.setAutorId.bind(this)} />
+                    <SelectCustomizado list={this.state.autorList} label="Autor" onChange={this.setAutorId.bind(this)} />
 
                     <Button type="submit" label="Gravar" />
                 </form>
@@ -51,6 +47,9 @@ export default class FormularioCadastroLivros extends Component {
             dataType:'json',
             type:'post',
             data: JSON.stringify({titulo:this.state.titulo, preco:this.state.preco, autorId:this.state.autorId}),
+            beforeSend: function(){
+                PubSub.publish('clear-errors', {});
+            },            
             success: function(response){
                 PubSub.publish('atualizar-livros', response);
                 this.setState({titulo:'',preco:'',autorId:''});

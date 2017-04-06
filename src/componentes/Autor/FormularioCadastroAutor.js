@@ -13,10 +13,6 @@ export default class FormularioCadastroAutor extends Component {
         this.state = {nome:'',email:'',senha:''};
     }
 
-    componentWillUpdate() {
-        PubSub.publish('clear-errors', {});
-    }
-
     render() {
         return (
             <div className="pure-form pure-form-aligned">
@@ -38,6 +34,9 @@ export default class FormularioCadastroAutor extends Component {
             dataType:'json',
             type:'post',
             data: JSON.stringify({nome:this.state.nome,email:this.state.email,senha:this.state.senha}),
+            beforeSend: function(){
+                PubSub.publish('clear-errors', {});
+            },            
             success: function(response){
                 PubSub.publish('atualizar-autores', response);
                 this.setState({nome:'',email:'',senha:''});

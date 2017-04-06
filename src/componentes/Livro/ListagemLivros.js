@@ -29,6 +29,7 @@ export default class ListagemLivros extends Component {
                             <th>Id</th>
                             <th>Titulo</th>
                             <th>Preço</th>
+                            <th>Autor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,7 @@ export default class ListagemLivros extends Component {
                                     <td>{livro.id}</td>
                                     <td>{livro.titulo}</td>
                                     <td>{livro.preco}</td>
+                                    <td>{livro.autor.nome}</td>
                                 </tr>
                             );
                         })
